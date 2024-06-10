@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import Result from './components/Result';
+import BillInp from './components/BillInp';
+import TipInp from './components/TipInp';
+import SplitBill from './components/SplitBill';
 
 function App() {
 
@@ -49,43 +53,21 @@ function App() {
       <div className='card bg-[#fff] w-[500px] py-6 px-5 mx-auto rounded max-[520px]:w-[400px]'>
         <h1 className='font-bold text-center text-[30px]'>Calculate Your Tip</h1>
 
-        <div className="totalBill flex justify-between items-center mt-5 max-[778px]:flex-col">
-          <label className='text-[20px] font-semibold'>Total Bill</label>
-          <input className='bg-[#a2a0ff] w-[63%] py-[10px] px-[7px] rounded placeholder:text-[#fff] focus:outline-none text-[#fff]' type="number" placeholder='Enter Your Bill Amount' value={bill} onChange={(e) => { setBill(e.target.value); calculateBill() }} />
-        </div>
+        
 
-        <div className="totalTip flex justify-between items-center mt-5 max-[778px]:flex-col">
-          <label className='text-[20px] font-semibold'>Total Tip</label>
-          <input className='bg-[#a2a0ff] w-[63%] py-[10px] px-[7px] rounded placeholder:text-[#fff] focus:outline-none text-[#fff]' type="number" placeholder='Enter Your Tip Percentage' value={tip} onChange={(e) => { setTip(e.target.value); calculateBill() }} />
-        </div>
+        <BillInp bill={bill} setBill={setBill} calculateBill={calculateBill}/>
 
-        <div className="SplitBill">
-          <div className="totalPeople">
-            <h5 className='text-center font-semibold mt-[50px]'>No. Of People</h5>
-            <div className="noPerson flex justify-center items-center gap-[20px] mt-3 mb-[50px]">
-              <i className="fa-solid fa-plus bg-[#a2a0ff] rounded-[50%] p-[20px] text-[#fff]" onClick={handlePlus} />
-              <p className='text-[30px]'>{persons}</p>
-              <i className="fa-solid fa-minus bg-[#a2a0ff] rounded-[50%] p-[20px] text-[#fff]" onClick={handleMinus} />
-            </div>
+       
 
-          </div>
+        <TipInp tip={tip} setTip={setTip} calculateBill={calculateBill}/>
 
+        
 
-        </div>
+        <SplitBill handleMinus ={handleMinus} handlePlus={handlePlus} persons={persons}/>
 
+        
 
-
-        <div className="output">
-          <div className="total flex justify-between items-center mt-5 max-[778px]:flex-col">
-            <h5 className='text-[20px] font-semibold'>Total Amount</h5>
-            <p>{total}</p>
-          </div>
-
-          <div className="eachTotal flex justify-between items-center mt-5 max-[778px]:flex-col">
-            <h5 className='text-[20px] font-semibold'>Amount For Each</h5>
-            <p>{splitCalcutate}</p>
-          </div>
-        </div>
+        <Result total={total} splitCalcutate={splitCalcutate}/>
       </div>
     </div>
   );
